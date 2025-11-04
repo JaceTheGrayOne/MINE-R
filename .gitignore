@@ -1,0 +1,111 @@
+# =========================
+# MINE-R PROJECT .gitignore
+# =========================
+
+# --- General ---
+*.log
+*.tmp
+*.bak
+*.cache
+*.lock
+*.DS_Store
+Thumbs.db
+.uasset
+legacy_assets/
+.legacy_assets/
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.egg
+*.egg-info/
+.eggs/
+.build/
+dist/
+.env/
+venv/
+.venv/
+ENV/
+env/
+
+# --- PowerShell ---
+*.ps1xml
+*.pssc
+*.psd1
+*.ps1~
+*.ps1_bak
+
+# --- .NET / C# ---
+# Build outputs
+[Bb]in/
+[Oo]bj/
+*.exe
+*.dll
+*.pdb
+*.mdb
+*.appx
+*.apphost.exe
+*.runtimeconfig.json
+*.deps.json
+
+# VS Code / IDE stuff
+.vscode/
+.idea/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.VisualStudio/
+.vs/
+
+# NuGet
+*.nupkg
+*.snupkg
+*.nuspec
+*.nuget.props
+*.nuget.targets
+*.nuget.cache
+
+# --- Frontend / JS (if used with Wails or webview) ---
+node_modules/
+dist/
+build/
+*.tsbuildinfo
+
+# --- Project-specific compiled assets ---
+tools/retoc/*.exe
+tools/retoc/*.dll
+tools/uasset_converter/bin/
+tools/uasset_converter/obj/
+tools/uasset_converter/lib/*.dll
+
+# --- Databases & caches ---
+*.db
+*.sqlite
+*.sqlite3
+database/*.db
+
+# --- OS / editor junk ---
+.DS_Store
+desktop.ini
+$RECYCLE.BIN/
+ehthumbs.db
+
+# --- Logs & temporary data directories ---
+logs/
+temp/
+tmp/
+__temp__/
+cache/
+
+# --- Keep important folders but not generated files ---
+!resources/
+!resources/images/
+!docs/
+!scripts/
+!frontend/
+!json_staging/
+!manifest.json
+!instruction.md

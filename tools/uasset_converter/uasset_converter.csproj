@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <AssemblyName>UAssetToJson</AssemblyName>
+    <!-- This tells .NET to copy all dependencies (like ZstdSharp.Port) to your output folder -->
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- This is your LOCAL reference to the .dll you built from source -->
+    <Reference Include="UAssetAPI">
+      <HintPath>lib\UAssetAPI.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- 
+      THESE ARE THE VERIFIED DEPENDENCIES:
+      This tells your project to download the *exact* versions
+      of the packages that UAssetAPI itself uses.
+    -->
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="ZstdSharp.Port" Version="0.8.0" />
+  </ItemGroup>
+
+</Project>
