@@ -50,6 +50,10 @@ New-Item -ItemType Directory -Force -Path $STAGING_DIR | Out-Null
 $uassetFiles = Get-ChildItem -Path $SOURCE_DIR -Recurse -File -Filter "*.uasset"
 Write-Host "Found $($uassetFiles.Count) .uasset files to convert."
 
+$successCount = 0
+$failCount = 0
+$failedFiles = @()
+
 foreach ($file in $uassetFiles) {
     $relativePath = $file.FullName.Substring($SOURCE_DIR.Length)
     $jsonOutputPath = Join-Path $STAGING_DIR $relativePath
@@ -66,21 +70,38 @@ foreach ($file in $uassetFiles) {
     if ($USMAP_PATH) {
         $arguments += "`"$USMAP_PATH`""
     }
-    
+
     # --- UPDATED EXECUTION LOGIC ---
     Write-Host "Converting $($file.Name)..."
     try {
         $process = Start-Process -FilePath $CONVERTER_EXE -ArgumentList $arguments -WorkingDirectory $CONVERTER_WORKING_DIR -Wait -PassThru -NoNewWindow
-        
+
         if ($process.ExitCode -ne 0) {
             throw "Failed to convert $($file.Name). Exit code: $($process.ExitCode)"
         }
+        $successCount++
+        Write-Host "  SUCCESS" -ForegroundColor Green
     } catch {
-        Write-Host "Error: Failed to convert $($file.Name)."
-        Write-Host $_
-        throw "Conversion failed."
+        $failCount++
+        $failedFiles += $file.Name
+        Write-Host "  FAILED: $_" -ForegroundColor Red
     }
 }
 
-Write-Host "Success: JSON conversion complete. Files are in $STAGING_DIR"
+Write-Host ""
+Write-Host "=============== CONVERSION SUMMARY ===============" -ForegroundColor Cyan
+Write-Host "Total files processed: $($uassetFiles.Count)"
+Write-Host "Successful conversions: $successCount" -ForegroundColor Green
+Write-Host "Failed conversions: $failCount" -ForegroundColor Red
+Write-Host "Output directory: $STAGING_DIR"
+
+if ($failCount -gt 0) {
+    Write-Host ""
+    Write-Host "Failed files:" -ForegroundColor Yellow
+    foreach ($failedFile in $failedFiles) {
+        Write-Host "  - $failedFile" -ForegroundColor Yellow
+    }
+}
+
+Write-Host "=================================================" -ForegroundColor Cyan
 

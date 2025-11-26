@@ -1,0 +1,21 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(dir:*)",
+      "Bash(git clone:*)",
+      "Bash(dotnet restore:*)",
+      "Bash(dotnet build:*)",
+      "Bash(copy:*)",
+      "Bash(cp:*)",
+      "Bash(dotnet clean:*)",
+      "Bash(pwsh:*)",
+      "Bash(test:*)",
+      "Bash(./2_filter_datatables.ps1)",
+      "Bash(powershell.exe -ExecutionPolicy Bypass -File \"2_filter_datatables.ps1\")",
+      "Bash(powershell.exe -ExecutionPolicy Bypass -File \"3_convert_uassets.ps1\")",
+      "Bash(python:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

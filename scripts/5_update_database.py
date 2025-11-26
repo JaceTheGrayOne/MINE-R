@@ -39,7 +39,9 @@ def load_localization_table():
     """Loads the entire localization table into memory for fast lookups."""
     try:
         with open(LOCALIZATION_PATH, 'r', encoding='utf-8') as f:
-            return json.load(f)[0]["Properties"]["StringTables"]
+            data = json.load(f)
+            # UAssetAPI format: Exports[0].Data[0].Value contains StringTables
+            return data['Exports'][0]['Data'][0]['Value']
     except Exception as e:
         print(f"CRITICAL ERROR: Could not load localization file at {LOCALIZATION_PATH}. Error: {e}")
         return []
